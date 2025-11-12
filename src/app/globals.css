@@ -1,26 +1,100 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --skilltree-night: #060212;
+  --skilltree-night-muted: #120933;
+  --skilltree-foreground: #f6f7ff;
+  --skilltree-muted: rgba(255, 255, 255, 0.65);
+  --skilltree-accent: #00ffd1;
+  --skilltree-accent-soft: rgba(0, 255, 209, 0.16);
+  --skilltree-warning: #ff9af5;
+  --skilltree-success: #8bfd7b;
+  --skilltree-info: #52e5ff;
+  --skilltree-primary-gradient: linear-gradient(135deg, #a066ff 0%, #52e5ff 100%);
+  --skilltree-glass: rgba(15, 9, 40, 0.55);
+  --skilltree-border: rgba(255, 255, 255, 0.08);
+  --skilltree-shadow: 0 25px 65px rgba(22, 5, 58, 0.35);
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-skilltree-night: var(--skilltree-night);
+  --color-skilltree-night-muted: var(--skilltree-night-muted);
+  --color-skilltree-foreground: var(--skilltree-foreground);
+  --color-skilltree-muted: var(--skilltree-muted);
+  --color-skilltree-accent: var(--skilltree-accent);
+  --color-skilltree-warning: var(--skilltree-warning);
+  --color-skilltree-success: var(--skilltree-success);
+  --color-skilltree-info: var(--skilltree-info);
+  --shadow-skilltree: var(--skilltree-shadow);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(circle at top, rgba(161, 102, 255, 0.25) 0%, rgba(8, 2, 25, 1) 65%),
+    linear-gradient(180deg, rgba(5, 1, 20, 1) 0%, rgba(6, 2, 18, 1) 100%);
+  min-height: 100vh;
+  color: var(--skilltree-foreground);
+  font-family: var(--font-poppins), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+@layer utilities {
+  .bg-skilltree-gradient {
+    background: var(--skilltree-primary-gradient);
+  }
+
+  .bg-skilltree-card {
+    background: var(--skilltree-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--skilltree-border);
+    box-shadow: var(--skilltree-shadow);
+  }
+
+  .glow-ring {
+    position: relative;
+  }
+
+  .glow-ring::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(from 180deg at 50% 50%, #ff9af5, #52e5ff, #8bfd7b, #ff9af5);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.65;
+    filter: blur(0.5px);
+  }
+
+  .text-gradient {
+    background: var(--skilltree-primary-gradient);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .floating {
+    animation: floating 6s ease-in-out infinite;
+  }
+
+  .floating-delayed {
+    animation: floating 7.5s ease-in-out 1.5s infinite;
+  }
+
+  @keyframes floating {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -12px, 0);
+    }
+  }
+
+  .fade-border {
+    border-image: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)) 1;
+  }
 }
