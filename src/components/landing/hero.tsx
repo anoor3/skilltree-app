@@ -56,13 +56,13 @@ export function Hero() {
         className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
       >
         <Link
-          href="#login"
+          href="/dashboard"
           className="glow-ring inline-flex min-w-[220px] items-center justify-center gap-2 rounded-full bg-skilltree-gradient px-8 py-4 text-base font-semibold text-skilltree-night shadow-lg transition-transform hover:-translate-y-1"
         >
           Continue with Google
         </Link>
         <Link
-          href="#login"
+          href="/dashboard?auth=email"
           className="inline-flex min-w-[220px] items-center justify-center rounded-full border border-white/20 px-8 py-4 text-base font-semibold text-skilltree-foreground transition-transform hover:-translate-y-1 hover:border-white/40"
         >
           Continue with Email

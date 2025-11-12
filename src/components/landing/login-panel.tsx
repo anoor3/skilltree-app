@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 export function LoginPanel() {
   return (
@@ -26,14 +27,20 @@ export function LoginPanel() {
             always switch later.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <button className="glow-ring inline-flex flex-1 items-center justify-center gap-3 rounded-full bg-skilltree-gradient px-5 py-4 text-sm font-semibold text-skilltree-night transition-transform hover:-translate-y-1">
+            <Link
+              className="glow-ring inline-flex flex-1 items-center justify-center gap-3 rounded-full bg-skilltree-gradient px-5 py-4 text-sm font-semibold text-skilltree-night transition-transform hover:-translate-y-1"
+              href="/dashboard"
+            >
               <Image src="/icons/google.svg" alt="Google" width={20} height={20} />
               Continue with Google
-            </button>
-            <button className="inline-flex flex-1 items-center justify-center gap-3 rounded-full border border-white/20 bg-white/5 px-5 py-4 text-sm font-semibold text-white transition-transform hover:-translate-y-1 hover:border-white/40">
+            </Link>
+            <Link
+              className="inline-flex flex-1 items-center justify-center gap-3 rounded-full border border-white/20 bg-white/5 px-5 py-4 text-sm font-semibold text-white transition-transform hover:-translate-y-1 hover:border-white/40"
+              href="/dashboard?auth=email"
+            >
               <span className="grid h-6 w-6 place-items-center rounded-full bg-white/20 text-xs">@</span>
               Continue with Email
-            </button>
+            </Link>
           </div>
           <p className="mt-6 text-xs text-skilltree-muted">
             By continuing you agree to our Terms of Service and consent to AI-powered recommendations tailored
