@@ -3,9 +3,33 @@ import type { AiSuggestion, Project, SkillNode, UserProfile } from "./types";
 export const userProfile: UserProfile = {
   id: "abdullah",
   name: "Abdullah Noor",
-  streak: 7,
-  avatarUrl: "https://avatars.dicebear.com/api/identicon/abdullah.svg",
   headline: "AI + CS Student @ Ohlone",
+  avatarUrl: "https://avatars.dicebear.com/api/identicon/abdullah.svg",
+  bio: "Building immersive learning worlds at the intersection of AI, design, and storytelling. Currently experimenting with autonomous learning companions and playful AR data viz.",
+  streak: 7,
+  location: "San Jose, CA",
+  focusAreas: [
+    {
+      title: "Creative AI",
+      description: "Generative tooling, prompt engineering, and LLM agent design for education.",
+      emoji: "✨",
+    },
+    {
+      title: "Immersive Frontend",
+      description: "Three.js-first experiences with glassmorphism and magnetic interactions.",
+      emoji: "🪄",
+    },
+    {
+      title: "Learning Science",
+      description: "Habit loops, spaced repetition, and reflective dashboards for growth.",
+      emoji: "🧠",
+    },
+  ],
+  links: [
+    { label: "Portfolio", url: "https://abdullahnoor.design" },
+    { label: "GitHub", url: "https://github.com/abdullah" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/abdullahnoor" },
+  ],
 };
 
 export const skillNodes: SkillNode[] = [

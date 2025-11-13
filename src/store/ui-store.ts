@@ -15,6 +15,10 @@ interface UiState {
   closeProject: () => void;
   lastActionMessage: string | null;
   setLastActionMessage: (message: string | null) => void;
+  isTreeFullscreen: boolean;
+  enterTreeFullscreen: () => void;
+  exitTreeFullscreen: () => void;
+  toggleTreeFullscreen: () => void;
 }
 
 export const useUiStore = create<UiState>((set) => ({
@@ -30,4 +34,8 @@ export const useUiStore = create<UiState>((set) => ({
   closeProject: () => set({ selectedProjectId: null }),
   lastActionMessage: null,
   setLastActionMessage: (message) => set({ lastActionMessage: message }),
+  isTreeFullscreen: false,
+  enterTreeFullscreen: () => set({ isTreeFullscreen: true }),
+  exitTreeFullscreen: () => set({ isTreeFullscreen: false }),
+  toggleTreeFullscreen: () => set((state) => ({ isTreeFullscreen: !state.isTreeFullscreen })),
 }));

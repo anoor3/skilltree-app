@@ -12,6 +12,9 @@ interface SkillState {
   selectedSkillId: string | null;
   setSkills: (skills: SkillNode[]) => void;
   selectSkill: (id: string | null) => void;
+  skillPositions: Record<string, { x: number; y: number }>;
+  setSkillPosition: (id: string, position: { x: number; y: number }) => void;
+  resetSkillPositions: () => void;
   addSkill: (payload: {
     name: string;
     emoji: string;
@@ -42,6 +45,15 @@ export const useSkillStore = create<SkillState>()(
       selectedSkillId: "python",
       setSkills: (skills) => set({ skills }),
       selectSkill: (id) => set({ selectedSkillId: id }),
+      skillPositions: {},
+      setSkillPosition: (id, position) =>
+        set((state) => ({
+          skillPositions: {
+            ...state.skillPositions,
+            [id]: { x: position.x, y: position.y },
+          },
+        })),
+      resetSkillPositions: () => set({ skillPositions: {} }),
       addSkill: ({ name, emoji, level, progress, connectsTo = [] }) => {
         const state = get();
         const id = name.toLowerCase().replace(/\s+/g, "-") + `-${nanoid(4)}`;
@@ -154,12 +166,15 @@ export const useSkillStore = create<SkillState>()(
         set({
           skills: filteredSkills,
           selectedSkillId: state.selectedSkillId === id ? null : state.selectedSkillId,
+          skillPositions: Object.fromEntries(
+            Object.entries(state.skillPositions).filter(([key]) => key !== id),
+          ),
         });
         void skillRepository.deleteSkill(id).catch(logRepoError("delete"));
 
         return removedSkill;
       },
-      reset: () => set({ skills: initialNodes, selectedSkillId: "python" }),
+      reset: () => set({ skills: initialNodes, selectedSkillId: "python", skillPositions: {} }),
     }),
     {
       name: "skilltree-store",
@@ -174,7 +189,11 @@ export const useSkillStore = create<SkillState>()(
         }
         return window.localStorage;
       }),
-      partialize: (state) => ({ skills: state.skills, selectedSkillId: state.selectedSkillId }),
+      partialize: (state) => ({
+        skills: state.skills,
+        selectedSkillId: state.selectedSkillId,
+        skillPositions: state.skillPositions,
+      }),
     },
   ),
 );

@@ -9,6 +9,7 @@ interface AuthState {
   isAuthenticated: boolean;
   signInWithMock: () => void;
   signOut: () => void;
+  updateUserProfile: (updates: Partial<UserProfile>) => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -16,4 +17,11 @@ export const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: true,
   signInWithMock: () => set({ user: mockProfile, isAuthenticated: true }),
   signOut: () => set({ user: null, isAuthenticated: false }),
+  updateUserProfile: (updates) =>
+    set((state) => {
+      if (!state.user) return state;
+      return {
+        user: { ...state.user, ...updates },
+      };
+    }),
 }));

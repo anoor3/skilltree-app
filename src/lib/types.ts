@@ -26,10 +26,25 @@ export interface AiSuggestion {
   actionLabel: string;
 }
 
+export interface ProfileFocusArea {
+  title: string;
+  description: string;
+  emoji: string;
+}
+
+export interface ProfileLink {
+  label: string;
+  url: string;
+}
+
 export interface UserProfile {
   id: string;
   name: string;
-  streak: number;
-  avatarUrl: string;
   headline: string;
+  avatarUrl: string;
+  bio: string;
+  streak: number;
+  location: string;
+  focusAreas: ProfileFocusArea[];
+  links: ProfileLink[];
 }
